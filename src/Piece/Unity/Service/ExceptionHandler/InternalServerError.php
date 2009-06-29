@@ -36,6 +36,8 @@
  * @since      File available since Release 0.1.0
  */
 
+require_once 'PEAR/Config.php';
+
 // {{{ Piece_Unity_Service_ExceptionHandler_InternalServerError
 
 /**
@@ -81,8 +83,9 @@ class Piece_Unity_Service_ExceptionHandler_InternalServerError implements Piece_
      */
     public function handle(Exception $exception)
     {
+        $config = new PEAR_Config();
         Piece_Unity_Service_ExceptionHandler_Rendering_PHP::render(
-            dirname(__FILE__) . '/../../../../../data/pear.piece-framework.com/Piece_Unity_Component_ExceptionHandler/' . basename(__FILE__),
+            $config->get('data_dir') . '/pear.piece-framework.com/Piece_Unity_Component_ExceptionHandler/' . basename(__FILE__),
             new Piece_Unity_ViewElement()
                                                                   );
     }
